@@ -29,3 +29,24 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.navbar .nav-link {
+    font-size: 17px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+    .navbar .nav-link:hover {
+        color: #198754 !important;
+    }
+
+.footer-link {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+    .footer-link:hover {
+        color: #198754;
+    }
