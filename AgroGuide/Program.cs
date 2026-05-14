@@ -1,7 +1,18 @@
+using DAL.EF;
+using DAL.Repos;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<FertilizerRepo>();
+builder.Services.AddDbContext<AgroGuideMsContext>(opt => {
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));
+});
 
 var app = builder.Build();
 
