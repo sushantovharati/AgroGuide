@@ -1,3 +1,4 @@
+using BLL.Services;
 using DAL.EF;
 using DAL.Repos;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ builder.Services.AddControllersWithViews();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<FertilizerRepo>();
+builder.Services.AddScoped<FertilizerService>();
 builder.Services.AddDbContext<AgroGuideMsContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));
 });

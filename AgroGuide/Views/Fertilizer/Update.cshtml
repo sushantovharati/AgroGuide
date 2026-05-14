@@ -1,0 +1,174 @@
+﻿@model BLL.DTOs.FertilizerDTO
+
+@{
+    ViewData["Title"] = "Update Fertilizer";
+}
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card border-0 shadow rounded-4">
+
+                    <div class="card-body p-5">
+
+                        <!-- Header -->
+                        <div class="mb-4">
+
+                            <h2 class="fw-bold text-warning">
+                                Update Fertilizer
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                Edit fertilizer information
+                            </p>
+
+                        </div>
+
+                        <!-- Form -->
+                        <form method="post">
+
+                            <!-- Hidden Id -->
+                            <input type="hidden" asp-for="Id" />
+
+                            <!-- Fertilizer Name -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Fertilizer Name
+                                </label>
+
+                                <input asp-for="FertilizerName"
+                                       class="form-control form-control-lg"
+                                       placeholder="Enter fertilizer name" />
+
+                                <span asp-validation-for="FertilizerName"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Type -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Type
+                                </label>
+
+                                <input asp-for="Type"
+                                       class="form-control form-control-lg"
+                                       placeholder="Enter fertilizer type" />
+
+                                <span asp-validation-for="Type"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Usage Instruction -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Usage Instruction
+                                </label>
+
+                                <textarea asp-for="UsageInstruction"
+                                          class="form-control"
+                                          rows="4"
+                                          placeholder="Enter usage instruction"></textarea>
+
+                                <span asp-validation-for="UsageInstruction"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <div class="row">
+
+                                <!-- Quantity -->
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label fw-semibold">
+                                        Quantity Per Acre
+                                    </label>
+
+                                    <input asp-for="QuantityPerAcre"
+                                           class="form-control form-control-lg"
+                                           placeholder="Enter quantity" />
+
+                                    <span asp-validation-for="QuantityPerAcre"
+                                          class="text-danger"></span>
+
+                                </div>
+
+                                <!-- Price -->
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label fw-semibold">
+                                        Price
+                                    </label>
+
+                                    <input asp-for="Price"
+                                           class="form-control form-control-lg"
+                                           placeholder="Enter price" />
+
+                                    <span asp-validation-for="Price"
+                                          class="text-danger"></span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Status -->
+                            <div class="form-check mb-4">
+
+                                <input asp-for="IsActive"
+                                       class="form-check-input" />
+
+                                <label class="form-check-label fw-semibold">
+                                    Active Status
+                                </label>
+
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex gap-3">
+
+                                <button type="submit"
+                                        class="btn btn-warning text-white px-5 py-3 rounded-3 fw-semibold">
+
+                                    <i class="bi bi-pencil-square me-2"></i>
+                                    Update Fertilizer
+
+                                </button>
+
+                                <a asp-controller="Fertilizer"
+                                       asp-action="Index"
+                                       class="btn btn-secondary px-5 py-3 rounded-3 fw-semibold">
+
+                                    Cancel
+
+                                </a>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
