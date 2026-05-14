@@ -28,6 +28,10 @@ public partial class AgroGuideMsContext : DbContext
 
     public virtual DbSet<Disease> Diseases { get; set; }
 
+    public virtual DbSet<District> Districts { get; set; }
+
+    public virtual DbSet<Division> Divisions { get; set; }
+
     public virtual DbSet<Farmer> Farmers { get; set; }
 
     public virtual DbSet<Fertilizer> Fertilizers { get; set; }
@@ -55,6 +59,9 @@ public partial class AgroGuideMsContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Phone)
@@ -134,27 +141,60 @@ public partial class AgroGuideMsContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<District>(entity =>
+        {
+            entity.Property(e => e.DistrictName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_Districts_IsActive");
+
+            entity.HasOne(d => d.Division).WithMany(p => p.Districts)
+                .HasForeignKey(d => d.DivisionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Districts_Divisions");
+        });
+
+        modelBuilder.Entity<Division>(entity =>
+        {
+            entity.Property(e => e.DivisionName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_Divisions_IsActive");
+        });
+
         modelBuilder.Entity<Farmer>(entity =>
         {
             entity.Property(e => e.Address)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.District)
-                .HasMaxLength(50)
-                .IsUnicode(false);
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.FullName)
+            entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.LandSize)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.District).WithMany(p => p.Farmers)
+                .HasForeignKey(d => d.DistrictId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Farmers_Districts");
+
+            entity.HasOne(d => d.Division).WithMany(p => p.Farmers)
+                .HasForeignKey(d => d.DivisionId)
+                .HasConstraintName("FK_Farmers_Divisions");
         });
 
         modelBuilder.Entity<Fertilizer>(entity =>
