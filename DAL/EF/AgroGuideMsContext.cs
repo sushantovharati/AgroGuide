@@ -202,6 +202,7 @@ public partial class AgroGuideMsContext : DbContext
             entity.Property(e => e.FertilizerName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_Fertilizers_IsActive");
             entity.Property(e => e.Type)
                 .HasMaxLength(50)
                 .IsUnicode(false);
