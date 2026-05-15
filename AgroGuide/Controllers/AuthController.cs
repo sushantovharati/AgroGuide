@@ -22,9 +22,37 @@ namespace AgroGuide.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginDTO data)
+        {
+            var user = authService.Login(data);
+
+            if (user != null)
+            {
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetString("UserName", user.Name);
+                HttpContext.Session.SetString("UserEmail", user.Email);
+                HttpContext.Session.SetString("Role", user.Role);
+
+                if (user.Role == "Admin")
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+
+                if (user.Role == "Farmer")
+                {
+                    return RedirectToAction("Dashboard", "Farmer");
+                }
+            }
+
+            TempData["Msg"] = "Invalid email or password";
+            return View(data);
         }
 
         [HttpGet]

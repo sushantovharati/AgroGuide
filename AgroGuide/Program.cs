@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -23,6 +23,7 @@ builder.Services.AddScoped<FarmerRepo>();
 builder.Services.AddScoped<DivisionRepo>();
 builder.Services.AddScoped<DistrictRepo>();
 builder.Services.AddScoped<DiseaseRepo>();
+builder.Services.AddScoped<AdminRepo>();
 
 //Services
 builder.Services.AddScoped<CategoryService>();
@@ -53,6 +54,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

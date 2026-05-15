@@ -12,10 +12,12 @@ namespace BLL.Services
     {
         private readonly FarmerRepo farmerRepo;
         private readonly Mapper mapper;
+        private readonly AdminRepo adminRepo;
 
-        public AuthService(FarmerRepo farmerRepo)
+        public AuthService(FarmerRepo farmerRepo, AdminRepo adminRepo)
         {
             this.farmerRepo = farmerRepo;
+            this.adminRepo = adminRepo;
             mapper = MapperConfig.GetMapper();
         }
 
@@ -26,6 +28,37 @@ namespace BLL.Services
             farmer.CreatedAt = DateTime.Now;
 
             return farmerRepo.Create(farmer);
+        }
+
+        public LoginResponseDTO Login(LoginDTO data)
+        {
+            var admin = adminRepo.GetByEmailPassword(data.Email, data.Password);
+
+            if (admin != null)
+            {
+                return new LoginResponseDTO
+                {
+                    Id = admin.Id,
+                    Name = admin.FirstName + " " + admin.LastName,
+                    Email = admin.Email,
+                    Role = "Admin"
+                };
+            }
+
+            var farmer = farmerRepo.GetByEmailPassword(data.Email, data.Password);
+
+            if (farmer != null)
+            {
+                return new LoginResponseDTO
+                {
+                    Id = farmer.Id,
+                    Name = farmer.FirstName + " " + farmer.LastName,
+                    Email = farmer.Email,
+                    Role = "Farmer"
+                };
+            }
+
+            return null;
         }
     }
 }
