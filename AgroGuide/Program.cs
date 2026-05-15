@@ -11,8 +11,23 @@ builder.Services.AddControllersWithViews();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Repo
+builder.Services.AddScoped<CategoryRepo>();
+builder.Services.AddScoped<CropRepo>();
 builder.Services.AddScoped<FertilizerRepo>();
+builder.Services.AddScoped<SeasonRepo>();
+builder.Services.AddScoped<SoilTypeRepo>();
+builder.Services.AddScoped<WaterRequirementRepo>();
+
+//Services
+builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<CropService>();
 builder.Services.AddScoped<FertilizerService>();
+builder.Services.AddScoped<SeasonService>();
+builder.Services.AddScoped<SoilTypeService>();
+builder.Services.AddScoped<WaterRequirementService>();
+
 builder.Services.AddDbContext<AgroGuideMsContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));
 });
@@ -36,7 +51,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Crop}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

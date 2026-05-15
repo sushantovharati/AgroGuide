@@ -11,7 +11,11 @@ namespace BLL
     {
         public static MapperConfiguration config = new MapperConfiguration(cfg => {
             cfg.CreateMap<Fertilizer, FertilizerDTO>().ReverseMap();
-            //cfg.CreateMap<Product, ProductDTO>().ReverseMap();
+            cfg.CreateMap<Crop, CropDTO>().ReverseMap();
+            cfg.CreateMap<Category, CategoryDTO>().ReverseMap();
+            cfg.CreateMap<Season, SeasonDTO>().ReverseMap();
+            cfg.CreateMap<SoilType, SoilTypeDTO>().ReverseMap();
+            cfg.CreateMap<WaterRequirement, WaterRequirementDTO>().ReverseMap();
         });
         public static Mapper GetMapper()
         {

@@ -45,7 +45,6 @@ namespace AgroGuide.Controllers
         public IActionResult Update(int id)
         {
             var data = fertilizerService.Get(id);
-            ViewBag.Categories = fertilizerService.Get();
             return View(data);
         }
         [HttpPost]

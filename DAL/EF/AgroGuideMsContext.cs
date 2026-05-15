@@ -81,7 +81,9 @@ public partial class AgroGuideMsContext : DbContext
 
         modelBuilder.Entity<Crop>(entity =>
         {
-            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())", "DF_Crops_CreatedAt")
+                .HasColumnType("datetime");
             entity.Property(e => e.CropName)
                 .HasMaxLength(50)
                 .IsUnicode(false);

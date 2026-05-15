@@ -1,0 +1,122 @@
+﻿@model BLL.DTOs.CropDTO
+
+@{
+    ViewData["Title"] = "Update Crop";
+}
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                <div class="card border-0 shadow rounded-4">
+                    <div class="card-body p-5">
+
+                        <h2 class="fw-bold text-warning mb-2">Update Crop</h2>
+                        <p class="text-muted mb-4">Edit crop information</p>
+
+                        <form method="post">
+
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="CreatedAt" />
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Crop Name</label>
+                                    <input asp-for="CropName" class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Scientific Name</label>
+                                    <input asp-for="ScientificName" class="form-control form-control-lg" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Category</label>
+                                    <select asp-for="CategoryId" class="form-select form-select-lg">
+                                        <option value="">Select Category</option>
+                                        @foreach (var c in ViewBag.Categories)
+                                        {
+                                            <option value="@c.Id">@c.Name</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Season</label>
+                                    <select asp-for="SeasonId" class="form-select form-select-lg">
+                                        <option value="">Select Season</option>
+                                        @foreach (var s in ViewBag.Seasons)
+                                        {
+                                            <option value="@s.Id">@s.SeasonName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Soil Type</label>
+                                    <select asp-for="SoilTypeId" class="form-select form-select-lg">
+                                        <option value="">Select Soil Type</option>
+                                        @foreach (var s in ViewBag.SoilTypes)
+                                        {
+                                            <option value="@s.Id">@s.SoilName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Water Requirement</label>
+                                    <select asp-for="WaterRequirementId" class="form-select form-select-lg">
+                                        <option value="">Select Water Requirement</option>
+                                        @foreach (var w in ViewBag.WaterRequirements)
+                                        {
+                                            <option value="@w.Id">@w.LevelName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Description</label>
+                                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Growth Duration</label>
+                                    <input asp-for="GrowthDurationDays" class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Image URL</label>
+                                    <input asp-for="ImageUrl" class="form-control form-control-lg" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 mt-4">
+                                <button type="submit"
+                                        class="btn btn-warning text-white px-5 py-3 rounded-3 fw-semibold">
+                                    <i class="bi bi-pencil-square me-2"></i>
+                                    Update Crop
+                                </button>
+
+                                <a asp-controller="Crop"
+                                       asp-action="Index"
+                                       class="btn btn-secondary px-5 py-3 rounded-3 fw-semibold">
+                                    Cancel
+                                </a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
