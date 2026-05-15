@@ -169,7 +169,9 @@ public partial class AgroGuideMsContext : DbContext
             entity.Property(e => e.Address)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())", "DF_Farmers_CreatedAt")
+                .HasColumnType("datetime");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -196,6 +198,7 @@ public partial class AgroGuideMsContext : DbContext
 
             entity.HasOne(d => d.Division).WithMany(p => p.Farmers)
                 .HasForeignKey(d => d.DivisionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Farmers_Divisions");
         });
 

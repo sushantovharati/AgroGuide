@@ -16,6 +16,11 @@ namespace BLL
             cfg.CreateMap<Season, SeasonDTO>().ReverseMap();
             cfg.CreateMap<SoilType, SoilTypeDTO>().ReverseMap();
             cfg.CreateMap<WaterRequirement, WaterRequirementDTO>().ReverseMap();
+            cfg.CreateMap<Farmer, FarmerDTO>().ReverseMap();
+            cfg.CreateMap<Farmer, RegisterDTO>().ReverseMap();
+            cfg.CreateMap<Division, DivisionDTO>().ReverseMap();
+            cfg.CreateMap<District, DistrictDTO>().ReverseMap();
+
         });
         public static Mapper GetMapper()
         {
