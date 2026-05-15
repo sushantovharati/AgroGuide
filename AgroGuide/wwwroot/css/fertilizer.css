@@ -1,0 +1,25 @@
+﻿.fertilizer-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .fertilizer-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+    }
+
+    .fertilizer-card img {
+        transition: transform 0.4s ease;
+    }
+
+    .fertilizer-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .fertilizer-card .btn {
+        transition: all 0.3s ease;
+    }
+
+        .fertilizer-card .btn:hover {
+            transform: translateY(-2px);
+        }

@@ -1,137 +1,126 @@
 ﻿@model List<BLL.DTOs.CropDTO>
 
 @{
-    ViewData["Title"] = "Crop List";
+    ViewData["Title"] = "Crops";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/crop.css" />
+}
+
+<!-- Hero Section -->
+<section class="py-5 bg-success text-white">
+    <div class="container text-center">
+
+        <h1 class="fw-bold display-5">
+            Explore Agricultural Crops
+        </h1>
+
+        <p class="lead mt-3">
+            Discover crop details, growing seasons, soil requirements,
+            and farming guidance with AgroGuide.
+        </p>
+
+    </div>
+</section>
+
+<!-- Crop List -->
 <section class="py-5 bg-light">
 
     <div class="container">
 
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Section Header -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
 
             <div>
-                <h2 class="fw-bold text-success">
-                    Crop Management
+                <h2 class="fw-bold text-success mb-1">
+                    Available Crops
                 </h2>
 
                 <p class="text-muted mb-0">
-                    Manage agricultural crops and farming information
+                    Browse all crops available in AgroGuide
                 </p>
             </div>
 
-            <a asp-controller="Crop"
-                   asp-action="Create"
-                   class="btn btn-success px-4 py-2 rounded-3">
-
-                <i class="bi bi-plus-circle me-2"></i>
-                Add Crop
-
-            </a>
-
         </div>
 
-        <!-- Table -->
-        <div class="card border-0 shadow rounded-4">
+        <!-- Cards -->
+        <div class="row g-4">
 
-            <div class="card-body">
+            @foreach (var crop in Model)
+            {
+                <div class="col-lg-4 col-md-6">
 
-                <div class="table-responsive">
+                    <div class="card h-100 border-0 shadow crop-card rounded-4">
 
-                    <table class="table table-hover align-middle">
+                        <!-- Image -->
+                        @if (!string.IsNullOrEmpty(crop.ImageUrl))
+                        {
+                            <img src="@crop.ImageUrl"
+                                 class="card-img-top rounded-top-4"
+                                 style="height: 240px; object-fit: cover;"
+                                 alt="@crop.CropName" />
+                        }
+                        else
+                        {
+                            <div class="bg-success text-white d-flex align-items-center justify-content-center rounded-top-4"
+                                 style="height:240px;">
 
-                        <thead class="table-success">
+                                <h3>@crop.CropName</h3>
 
-                            <tr>
-                                <th>#</th>
-                                <th>Crop Name</th>
-                                <th>Scientific Name</th>
-                                <th>Category Name</th>
-                                <th>Season Name</th>
-                                <th>Soil Type</th>
-                                <th>Water Requirement</th>
-                                <th>Growth Duration</th>
-                                <th>Created At</th>
-                                <th width="180">Actions</th>
-                            </tr>
+                            </div>
+                        }
 
-                        </thead>
+                        <!-- Body -->
+                        <div class="card-body p-4">
 
-                        <tbody>
+                            <h4 class="fw-bold text-success">
+                                @crop.CropName
+                            </h4>
 
-                            @foreach (var item in Model)
-                            {
-                                <tr>
+                            <p class="text-muted fst-italic mb-2">
+                                @crop.ScientificName
+                            </p>
 
-                                    <td>@item.Id</td>
+                            <p class="mb-3">
+                                @crop.Description
+                            </p>
 
-                                    <td class="fw-semibold">
-                                        @item.CropName
-                                    </td>
+                            <div class="mb-2">
+                                <strong>Category:</strong>
+                                @crop.Category.Name
+                            </div>
 
-                                    <td>
-                                        <i>@item.ScientificName</i>
-                                    </td>
+                            <div class="mb-2">
+                                <strong>Season:</strong>
+                                @crop.Season.SeasonName
+                            </div>
 
-                                    <td>
-                                        @item.Category.Name
-                                    </td>
+                            <div class="mb-2">
+                                <strong>Soil Type:</strong>
+                                @crop.SoilType.SoilName
+                            </div>
 
-                                    <td>
-                                        @item.Season.SeasonName
-                                    </td>
+                            <div class="mb-3">
+                                <strong>Growth Duration:</strong>
+                                @crop.GrowthDurationDays
+                            </div>
 
-                                    <td>
-                                        @item.SoilType.SoilName
-                                    </td>
+                            <a asp-controller="Crop"
+                                   asp-action="Details"
+                                   asp-route-id="@crop.Id"
+                                   class="btn btn-outline-success rounded-3">
 
-                                    <td>
-                                        @item.WaterRequirement.LevelName
-                                    </td>
+                                View Details
 
-                                    <td>
-                                        @item.GrowthDurationDays
-                                    </td>
+                            </a>
 
-                                    <td>
-                                        @(item.CreatedAt?.ToString("dd MMM yyyy"))
-                                    </td>
+                        </div>
 
-                                    <td>
-
-                                        <a asp-controller="Crop"
-                                               asp-action="Update"
-                                               asp-route-id="@item.Id"
-                                               class="btn btn-sm btn-warning">
-
-                                            <i class="bi bi-pencil-square"></i>
-                                            Edit
-
-                                        </a>
-
-                                        <a asp-controller="Crop"
-                                               asp-action="Delete"
-                                               asp-route-id="@item.Id"
-                                               class="btn btn-sm btn-danger">
-
-                                            <i class="bi bi-trash"></i>
-                                            Delete
-
-                                        </a>
-
-                                    </td>
-
-                                </tr>
-                            }
-
-                        </tbody>
-
-                    </table>
+                    </div>
 
                 </div>
-
-            </div>
+            }
 
         </div>
 

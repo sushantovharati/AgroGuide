@@ -1,0 +1,8 @@
+﻿.view-all-btn {
+    transition: all 0.3s ease;
+}
+
+    .view-all-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(25, 135, 84, 0.25);
+    }

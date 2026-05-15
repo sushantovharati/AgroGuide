@@ -28,8 +28,8 @@ namespace AgroGuide.Controllers
 
         public IActionResult Index()
         {
-            var data = cropService.Get();
-            return View(data);
+            var crops = cropService.Get();
+            return View("Index", crops);
         }
 
         [HttpGet]

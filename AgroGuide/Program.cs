@@ -22,6 +22,7 @@ builder.Services.AddScoped<WaterRequirementRepo>();
 builder.Services.AddScoped<FarmerRepo>();
 builder.Services.AddScoped<DivisionRepo>();
 builder.Services.AddScoped<DistrictRepo>();
+builder.Services.AddScoped<DiseaseRepo>();
 
 //Services
 builder.Services.AddScoped<CategoryService>();
@@ -34,6 +35,7 @@ builder.Services.AddScoped<FarmerService>();
 builder.Services.AddScoped<DivisionService>();
 builder.Services.AddScoped<DistrictService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<DiseaseService>();
 
 builder.Services.AddDbContext<AgroGuideMsContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));
@@ -58,7 +60,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Register}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

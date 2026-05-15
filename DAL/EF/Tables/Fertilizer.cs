@@ -17,5 +17,7 @@ public partial class Fertilizer
 
     public double Price { get; set; }
 
-    public bool IsActive { get; set; }
+    public bool? IsActive { get; set; }
+
+    public string? ImageUrl { get; set; }
 }

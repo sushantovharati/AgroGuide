@@ -88,13 +88,13 @@ public partial class AgroGuideMsContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Description)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.GrowthDurationDays)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.ImageUrl)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.ScientificName)
                 .HasMaxLength(50)
@@ -126,12 +126,16 @@ public partial class AgroGuideMsContext : DbContext
             entity.Property(e => e.Causes)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())", "DF_Diseases_CreatedAt")
+                .HasColumnType("datetime");
             entity.Property(e => e.DiseaseName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.ImageUrl)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
+            entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_Diseases_IsActive");
             entity.Property(e => e.Prevention)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -206,6 +210,9 @@ public partial class AgroGuideMsContext : DbContext
         {
             entity.Property(e => e.FertilizerName)
                 .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ImageUrl)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_Fertilizers_IsActive");
             entity.Property(e => e.Type)

@@ -1,0 +1,49 @@
+﻿.weather-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .weather-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+    }
+
+.forecast-box {
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+    .forecast-box:hover {
+        background-color: #198754;
+        color: white;
+        transform: translateY(-4px);
+    }
+
+        .forecast-box:hover p,
+        .forecast-box:hover h5,
+        .forecast-box:hover h6 {
+            color: white !important;
+        }
+
+.weather-card .display-2 {
+    color: #198754;
+}
+
+.weather-card .display-3 {
+    animation: floatWeather 3s ease-in-out infinite;
+}
+
+@keyframes floatWeather {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}

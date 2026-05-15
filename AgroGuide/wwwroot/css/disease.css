@@ -1,0 +1,33 @@
+﻿.disease-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .disease-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+    }
+
+    .disease-card img {
+        transition: transform 0.4s ease;
+    }
+
+    .disease-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .disease-card .btn {
+        transition: all 0.3s ease;
+    }
+
+        .disease-card .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .disease-card h4 {
+        min-height: 60px;
+    }
+
+    .disease-card p {
+        min-height: 80px;
+    }

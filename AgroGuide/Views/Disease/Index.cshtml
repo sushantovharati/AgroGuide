@@ -1,11 +1,11 @@
-﻿@model List<BLL.DTOs.FertilizerDTO>
+﻿@model List<BLL.DTOs.DiseaseDTO>
 
 @{
-    ViewData["Title"] = "Fertilizers";
+    ViewData["Title"] = "Disease Guide";
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/fertilizer.css" />
+    <link rel="stylesheet" href="~/css/disease.css" />
 }
 
 <!-- Hero Section -->
@@ -14,19 +14,19 @@
     <div class="container text-center">
 
         <h1 class="fw-bold display-5">
-            Fertilizer Guidance
+            Crop Disease Guide
         </h1>
 
         <p class="lead mt-3">
-            Explore fertilizers, usage instructions,
-            and crop nutrition support with AgroGuide.
+            Learn about common crop diseases, symptoms,
+            prevention methods, and treatment solutions.
         </p>
 
     </div>
 
 </section>
 
-<!-- Fertilizer Cards -->
+<!-- Disease Cards -->
 <section class="py-5 bg-light">
 
     <div class="container">
@@ -35,13 +35,15 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
 
             <div>
+
                 <h2 class="fw-bold text-success mb-1">
-                    Available Fertilizers
+                    Common Crop Diseases
                 </h2>
 
                 <p class="text-muted mb-0">
-                    Browse fertilizers and farming nutrition support
+                    Explore diseases affecting agricultural crops
                 </p>
+
             </div>
 
         </div>
@@ -53,7 +55,7 @@
             {
                 <div class="col-lg-4 col-md-6">
 
-                    <div class="card h-100 border-0 shadow rounded-4 fertilizer-card">
+                    <div class="card h-100 border-0 shadow rounded-4 disease-card">
 
                         <!-- Image -->
                         @if (!string.IsNullOrEmpty(item.ImageUrl))
@@ -61,14 +63,14 @@
                             <img src="@item.ImageUrl"
                                  class="card-img-top rounded-top-4"
                                  style="height:240px; object-fit:cover;"
-                                 alt="@item.FertilizerName" />
+                                 alt="@item.DiseaseName" />
                         }
                         else
                         {
                             <div class="bg-success text-white d-flex align-items-center justify-content-center rounded-top-4"
                                  style="height:240px;">
 
-                                <h3>@item.FertilizerName</h3>
+                                <h3>@item.DiseaseName</h3>
 
                             </div>
                         }
@@ -77,28 +79,24 @@
                         <div class="card-body p-4">
 
                             <h4 class="fw-bold text-success">
-                                @item.FertilizerName
+                                @item.DiseaseName
                             </h4>
 
-                            <p class="text-muted mb-2">
-                                @item.Type Fertilizer
-                            </p>
-
-                            <p class="mb-3">
-                                @item.UsageInstruction
+                            <p class="mb-3 text-muted">
+                                @item.Symptoms
                             </p>
 
                             <div class="mb-2">
-                                <strong>Quantity Per Acre:</strong>
-                                @item.QuantityPerAcre KG
+                                <strong>Cause:</strong>
+                                @item.Causes
                             </div>
 
                             <div class="mb-3">
-                                <strong>Price:</strong>
-                                TK @item.Price
+                                <strong>Prevention:</strong>
+                                @item.Prevention
                             </div>
 
-                            <a asp-controller="Fertilizer"
+                            <a asp-controller="Disease"
                                    asp-action="Details"
                                    asp-route-id="@item.Id"
                                    class="btn btn-outline-success rounded-3">
