@@ -20,6 +20,6 @@ namespace BLL.DTOs
 
         public bool IsActive { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; } = null;
     }
 }

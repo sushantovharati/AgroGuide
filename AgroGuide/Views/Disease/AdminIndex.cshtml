@@ -1,8 +1,8 @@
-﻿@model List<BLL.DTOs.FertilizerDTO>
+﻿@model List<BLL.DTOs.DiseaseDTO>
 
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Fertilizer List";
+    ViewData["Title"] = "Disease List";
 }
 
 <section class="py-5 bg-light">
@@ -14,20 +14,20 @@
 
             <div>
                 <h2 class="fw-bold text-success">
-                    Fertilizer Management
+                    Disease Management
                 </h2>
 
                 <p class="text-muted mb-0">
-                    Manage all agricultural fertilizers
+                    Manage crop diseases and treatment information
                 </p>
             </div>
 
-            <a asp-controller="Fertilizer"
+            <a asp-controller="Disease"
                    asp-action="Create"
                    class="btn btn-success px-4 py-2 rounded-3">
 
                 <i class="bi bi-plus-circle me-2"></i>
-                Add Fertilizer
+                Add Disease
 
             </a>
 
@@ -46,12 +46,14 @@
 
                             <tr>
                                 <th>#</th>
-                                <th>Fertilizer Name</th>
-                                <th>Type</th>
-                                <th>Usage Instruction</th>
-                                <th>Quantity/Acre</th>
-                                <th>Price</th>
-                                <th>Status</th>
+                                <th>Disease Name</th>
+                                <th>Symptoms</th>
+                                <th>Causes</th>
+                                <th>Solution</th>
+                                <th>Prevention</th>
+                                <th>Image URL</th>
+                                @* <th>Status</th> *@
+                                <th>Created At</th>
                                 <th width="180">Actions</th>
                             </tr>
 
@@ -64,14 +66,34 @@
                                 <tr>
 
                                     <td>@item.Id</td>
-                                    <td class="fw-semibold">@item.FertilizerName</td>
-                                    <td>@item.Type</td>
-                                    <td>@item.UsageInstruction</td>
-                                    <td>@item.QuantityPerAcre KG</td>
-                                    <td>TK @item.Price</td>
-                                    <td>
 
-                                        @if (item.IsActive == true)
+                                    <td class="fw-semibold">
+                                        @item.DiseaseName
+                                    </td>
+
+                                    <td>
+                                        @item.Symptoms
+                                    </td>
+
+                                    <td>
+                                        @item.Causes
+                                    </td>
+
+                                    <td>
+                                        @item.Solution
+                                    </td>
+
+                                    <td>
+                                        @item.Prevention
+                                    </td>
+
+                                    <td>
+                                        @item.ImageUrl
+                                    </td>
+
+                                    @* <td>
+
+                                        @if (item.IsActive)
                                         {
                                             <span class="badge bg-success">
                                                 Active
@@ -84,11 +106,15 @@
                                             </span>
                                         }
 
+                                    </td> *@
+
+                                    <td>
+                                        @(item.CreatedAt?.ToString("dd MMM yyyy"))
                                     </td>
 
                                     <td>
 
-                                        <a asp-controller="Fertilizer"
+                                        <a asp-controller="Disease"
                                                asp-action="Update"
                                                asp-route-id="@item.Id"
                                                class="btn btn-sm btn-warning">
@@ -98,7 +124,7 @@
 
                                         </a>
 
-                                        <a asp-controller="Fertilizer"
+                                        <a asp-controller="Disease"
                                                asp-action="Delete"
                                                asp-route-id="@item.Id"
                                                class="btn btn-sm btn-danger">

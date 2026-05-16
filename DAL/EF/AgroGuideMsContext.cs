@@ -124,7 +124,7 @@ public partial class AgroGuideMsContext : DbContext
         modelBuilder.Entity<Disease>(entity =>
         {
             entity.Property(e => e.Causes)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())", "DF_Diseases_CreatedAt")
@@ -137,13 +137,13 @@ public partial class AgroGuideMsContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_Diseases_IsActive");
             entity.Property(e => e.Prevention)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.Solution)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.Symptoms)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
         });
 

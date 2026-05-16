@@ -23,7 +23,7 @@ public partial class Farmer
 
     public string LandSize { get; set; } = null!;
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public string Password { get; set; } = null!;
 

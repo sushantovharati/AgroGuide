@@ -1,4 +1,5 @@
-﻿using BLL.DTOs;
+﻿using AgroGuide.AuthFilter;
+using BLL.DTOs;
 using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,10 +30,23 @@ namespace AgroGuide.Controllers
         public IActionResult Index()
         {
             var crops = cropService.Get();
-            return View("Index", crops);
+            var role = HttpContext.Session.GetString("Role");
+
+            if (role == "Admin")
+            {
+                return View("AdminIndex", crops);
+            }
+
+            if (role == "Farmer")
+            {
+                return View("Index", crops);
+            }
+
+            return View(crops);
         }
 
         [HttpGet]
+        [AdminAccess]
         public IActionResult Create()
         {
             ViewBag.Categories = categoryService.Get();
@@ -44,6 +58,7 @@ namespace AgroGuide.Controllers
         }
 
         [HttpPost]
+        [AdminAccess]
         public IActionResult Create(CropDTO crop)
         {
             if (ModelState.IsValid)
@@ -64,6 +79,7 @@ namespace AgroGuide.Controllers
         }
 
         [HttpGet]
+        [AdminAccess]
         public IActionResult Update(int id)
         {
             var data = cropService.Get(id);
@@ -73,7 +89,9 @@ namespace AgroGuide.Controllers
             ViewBag.WaterRequirements = waterRequirementService.Get();
             return View(data);
         }
+
         [HttpPost]
+        [AdminAccess]
         public IActionResult Update(CropDTO cropDTO)
         {
             if (ModelState.IsValid)
@@ -94,12 +112,14 @@ namespace AgroGuide.Controllers
         }
 
         [HttpGet]
+        [AdminAccess]
         public IActionResult Delete(int id)
         {
             var data = cropService.Get(id);
             return View(data);
         }
         [HttpPost]
+        [AdminAccess]
         public IActionResult Delete(int id, string Decison)
         {
             if (Decison.Equals("Yes"))

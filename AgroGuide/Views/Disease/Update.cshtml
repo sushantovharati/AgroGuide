@@ -1,0 +1,186 @@
+﻿@model BLL.DTOs.DiseaseDTO
+
+@{
+    ViewData["Title"] = "Update Disease";
+}
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card border-0 shadow rounded-4">
+
+                    <div class="card-body p-5">
+
+                        <!-- Header -->
+                        <div class="mb-4">
+
+                            <h2 class="fw-bold text-warning">
+                                Update Disease
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                Edit disease information
+                            </p>
+
+                        </div>
+
+                        <!-- Form -->
+                        <form method="post">
+
+                            <!-- Hidden Id -->
+                            <input type="hidden" asp-for="Id" />
+
+                            <!-- Disease Name -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Disease Name
+                                </label>
+
+                                <input asp-for="DiseaseName"
+                                       class="form-control form-control-lg"
+                                       placeholder="Enter disease name" />
+
+                                <span asp-validation-for="DiseaseName"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Symptoms -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Symptoms
+                                </label>
+
+                                <textarea asp-for="Symptoms"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter symptoms"></textarea>
+
+                                <span asp-validation-for="Symptoms"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Causes -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Causes
+                                </label>
+
+                                <textarea asp-for="Causes"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter causes"></textarea>
+
+                                <span asp-validation-for="Causes"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Solution -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Solution
+                                </label>
+
+                                <textarea asp-for="Solution"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter solution"></textarea>
+
+                                <span asp-validation-for="Solution"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Prevention -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Prevention
+                                </label>
+
+                                <textarea asp-for="Prevention"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter prevention"></textarea>
+
+                                <span asp-validation-for="Prevention"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Image URL -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Image URL
+                                </label>
+
+                                <input asp-for="ImageUrl"
+                                       class="form-control form-control-lg"
+                                       placeholder="Optional image URL" />
+
+                            </div>
+
+                            <!-- Status -->
+                            <div class="form-check mb-4">
+
+                                <input asp-for="IsActive"
+                                       class="form-check-input" />
+
+                                <label class="form-check-label fw-semibold">
+                                    Active Status
+                                </label>
+
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex gap-3">
+
+                                <button type="submit"
+                                        class="btn btn-warning text-white px-5 py-3 rounded-3 fw-semibold">
+
+                                    <i class="bi bi-pencil-square me-2"></i>
+                                    Update Disease
+
+                                </button>
+
+                                <a asp-controller="Disease"
+                                       asp-action="Index"
+                                       class="btn btn-secondary px-5 py-3 rounded-3 fw-semibold">
+
+                                    Cancel
+
+                                </a>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,20 +1,8 @@
-﻿@model BLL.DTOs.FertilizerDTO
+﻿@model BLL.DTOs.DiseaseDTO
 
 @{
-    ViewData["Title"] = "Add Fertilizer";
+    ViewData["Title"] = "Add Disease";
 }
-
-@* @if (ViewBag.Errors != null)
-{
-    <div class="alert alert-danger">
-        <ul>
-            @foreach (var err in ViewBag.Errors)
-            {
-                <li>@err</li>
-            }
-        </ul>
-    </div>
-} *@
 
 <section class="py-5 bg-light">
 
@@ -32,11 +20,11 @@
                         <div class="mb-4">
 
                             <h2 class="fw-bold text-success">
-                                Add New Fertilizer
+                                Add New Disease
                             </h2>
 
                             <p class="text-muted mb-0">
-                                Create a new fertilizer entry for AgroGuide
+                                Create a new disease entry for AgroGuide
                             </p>
 
                         </div>
@@ -44,88 +32,91 @@
                         <!-- Form -->
                         <form method="post">
 
-                            <!-- Fertilizer Name -->
+                            <!-- Disease Name -->
                             <div class="mb-3">
 
                                 <label class="form-label fw-semibold">
-                                    Fertilizer Name
+                                    Disease Name
                                 </label>
 
-                                <input asp-for="FertilizerName"
+                                <input asp-for="DiseaseName"
                                        class="form-control form-control-lg"
-                                       placeholder="Enter fertilizer name" />
+                                       placeholder="Enter disease name" />
 
-                                <span asp-validation-for="FertilizerName"
+                                <span asp-validation-for="DiseaseName"
                                       class="text-danger"></span>
 
                             </div>
 
-                            <!-- Type -->
+                            <!-- Symptoms -->
                             <div class="mb-3">
 
                                 <label class="form-label fw-semibold">
-                                    Type
+                                    Symptoms
                                 </label>
 
-                                <input asp-for="Type"
-                                       class="form-control form-control-lg"
-                                       placeholder="Enter fertilizer type" />
-
-                                <span asp-validation-for="Type"
-                                      class="text-danger"></span>
-
-                            </div>
-
-                            <!-- Usage Instruction -->
-                            <div class="mb-3">
-
-                                <label class="form-label fw-semibold">
-                                    Usage Instruction
-                                </label>
-
-                                <textarea asp-for="UsageInstruction"
+                                <textarea asp-for="Symptoms"
                                           class="form-control"
-                                          rows="4"
-                                          placeholder="Enter usage instruction"></textarea>
+                                          rows="3"
+                                          placeholder="Enter symptoms"></textarea>
 
-                                <span asp-validation-for="UsageInstruction"
+                                <span asp-validation-for="Symptoms"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Causes -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Causes
+                                </label>
+
+                                <textarea asp-for="Causes"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter causes"></textarea>
+
+                                <span asp-validation-for="Causes"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Solution -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Solution
+                                </label>
+
+                                <textarea asp-for="Solution"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter solution"></textarea>
+
+                                <span asp-validation-for="Solution"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Prevention -->
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Prevention
+                                </label>
+
+                                <textarea asp-for="Prevention"
+                                          class="form-control"
+                                          rows="3"
+                                          placeholder="Enter prevention"></textarea>
+
+                                <span asp-validation-for="Prevention"
                                       class="text-danger"></span>
 
                             </div>
 
                             <div class="row">
-
-                                <!-- Quantity -->
-                                <div class="col-md-6 mb-3">
-
-                                    <label class="form-label fw-semibold">
-                                        Quantity Per Acre
-                                    </label>
-
-                                    <input asp-for="QuantityPerAcre"
-                                           class="form-control form-control-lg"
-                                           placeholder="Enter quantity" />
-
-                                    <span asp-validation-for="QuantityPerAcre"
-                                          class="text-danger"></span>
-
-                                </div>
-
-                                <!-- Price -->
-                                <div class="col-md-6 mb-3">
-
-                                    <label class="form-label fw-semibold">
-                                        Price
-                                    </label>
-
-                                    <input asp-for="Price"
-                                           class="form-control form-control-lg"
-                                           placeholder="Enter price" />
-
-                                    <span asp-validation-for="Price"
-                                          class="text-danger"></span>
-
-                                </div>
 
                                 <!-- Image URL -->
                                 <div class="col-md-6 mb-3">
@@ -161,11 +152,11 @@
                                         class="btn btn-success px-5 py-3 rounded-3 fw-semibold">
 
                                     <i class="bi bi-check-circle me-2"></i>
-                                    Save Fertilizer
+                                    Save Disease
 
                                 </button>
 
-                                <a asp-controller="Fertilizer"
+                                <a asp-controller="Disease"
                                        asp-action="Index"
                                        class="btn btn-secondary px-5 py-3 rounded-3 fw-semibold">
 
