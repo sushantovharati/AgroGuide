@@ -28,6 +28,16 @@ namespace AgroGuide.Controllers
             return View();
         }
 
+        [FarmerAccess]
+        public IActionResult Profile()
+        {
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+            ViewBag.UserId = HttpContext.Session.GetInt32("UserId");
+
+            return View();
+        }
+
         [HttpGet]
         [AdminAccess]
         public IActionResult Delete(int id)

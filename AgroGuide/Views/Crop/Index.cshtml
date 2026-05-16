@@ -1,7 +1,19 @@
 ﻿@model List<BLL.DTOs.CropDTO>
 
+
 @{
     ViewData["Title"] = "Crops";
+
+    var role = Context.Session.GetString("Role");
+
+    if (role == "Farmer")
+    {
+        Layout = "~/Views/Shared/_FarmerLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
 
 @section Styles {

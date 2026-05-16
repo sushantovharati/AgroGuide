@@ -51,7 +51,7 @@ namespace AgroGuide.Controllers
                 }
             }
 
-            TempData["Msg"] = "Invalid email or password";
+            TempData["LoginMsg"] = "Invalid email or password";
             return View(data);
         }
 
@@ -80,6 +80,13 @@ namespace AgroGuide.Controllers
             ViewBag.Districts = districtService.Get();
 
             return View(data);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
