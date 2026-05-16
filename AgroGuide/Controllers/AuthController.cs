@@ -31,27 +31,31 @@ namespace AgroGuide.Controllers
         [HttpPost]
         public IActionResult Login(LoginDTO data)
         {
-            var user = authService.Login(data);
-
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                HttpContext.Session.SetInt32("UserId", user.Id);
-                HttpContext.Session.SetString("UserName", user.Name);
-                HttpContext.Session.SetString("UserEmail", user.Email);
-                HttpContext.Session.SetString("Role", user.Role);
+                var user = authService.Login(data);
 
-                if (user.Role == "Admin")
+                if (user != null)
                 {
-                    return RedirectToAction("Dashboard", "Admin");
+                    HttpContext.Session.SetInt32("UserId", user.Id);
+                    HttpContext.Session.SetString("UserName", user.Name);
+                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("Role", user.Role);
+
+                    if (user.Role == "Admin")
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+                    }
+
+                    if (user.Role == "Farmer")
+                    {
+                        return RedirectToAction("Dashboard", "Farmer");
+                    }
                 }
 
-                if (user.Role == "Farmer")
-                {
-                    return RedirectToAction("Dashboard", "Farmer");
-                }
+                TempData["LoginMsg"] = "Invalid email or password";
             }
 
-            TempData["LoginMsg"] = "Invalid email or password";
             return View(data);
         }
 

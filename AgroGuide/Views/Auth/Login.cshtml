@@ -41,6 +41,8 @@
                                        class="form-control form-control-lg"
                                        placeholder="Enter your email" />
 
+                                <span asp-validation-for="Email" class="text-danger"></span>
+
                             </div>
 
                             <div class="mb-4">
@@ -53,6 +55,8 @@
                                        type="password"
                                        class="form-control form-control-lg"
                                        placeholder="Enter your password" />
+
+                                <span asp-validation-for="Password" class="text-danger"></span>
 
                             </div>
 
@@ -91,3 +95,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
