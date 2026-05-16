@@ -1,6 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Weather";
+
+    var role = Context.Session.GetString("Role");
+
+    if (role == "Farmer")
+    {
+        Layout = "~/Views/Shared/_FarmerLayout.cshtml";
+    }
+    else if (role == "Admin")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
+
 
 @section Styles {
     <link rel="stylesheet" href="~/css/weather.css" />
