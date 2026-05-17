@@ -1,6 +1,7 @@
 ﻿@model BLL.DTOs.CropDTO
 
 @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Add Crop";
 }
 
@@ -32,6 +33,8 @@
                         <!-- Form -->
                         <form method="post">
 
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
                             <div class="row">
 
                                 <!-- Crop Name -->
@@ -45,6 +48,8 @@
                                            class="form-control form-control-lg"
                                            placeholder="Enter crop name" />
 
+                                    <span asp-validation-for="CropName" class="text-danger"></span>
+
                                 </div>
 
                                 <!-- Scientific Name -->
@@ -57,6 +62,8 @@
                                     <input asp-for="ScientificName"
                                            class="form-control form-control-lg"
                                            placeholder="Enter scientific name" />
+
+                                    <span asp-validation-for="ScientificName" class="text-danger"></span>
 
                                 </div>
 
@@ -87,6 +94,8 @@
 
                                     </select>
 
+                                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+
                                 </div>
 
                                 <!-- Season -->
@@ -111,6 +120,8 @@
                                         }
 
                                     </select>
+
+                                    <span asp-validation-for="SeasonId" class="text-danger"></span>
 
                                 </div>
 
@@ -141,6 +152,8 @@
 
                                     </select>
 
+                                    <span asp-validation-for="SoilTypeId" class="text-danger"></span>
+
                                 </div>
 
                                 <!-- Water Requirement -->
@@ -166,6 +179,8 @@
 
                                     </select>
 
+                                    <span asp-validation-for="WaterRequirementId" class="text-danger"></span>
+
                                 </div>
 
                             </div>
@@ -182,6 +197,8 @@
                                           rows="4"
                                           placeholder="Enter crop description"></textarea>
 
+                                <span asp-validation-for="Description" class="text-danger"></span>
+
                             </div>
 
                             <div class="row">
@@ -190,12 +207,14 @@
                                 <div class="col-md-6 mb-3">
 
                                     <label class="form-label fw-semibold">
-                                        Growth Duration
+                                        Growth Duration (Days)
                                     </label>
 
                                     <input asp-for="GrowthDurationDays"
                                            class="form-control form-control-lg"
-                                           placeholder="Example: 120 Days" />
+                                           placeholder="Example: 120" />
+
+                                    <span asp-validation-for="GrowthDurationDays" class="text-danger"></span>
 
                                 </div>
 
@@ -248,3 +267,7 @@
     </div>
 
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

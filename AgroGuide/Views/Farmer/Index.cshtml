@@ -55,13 +55,15 @@
                         </thead>
 
                         <tbody>
-
+                            @{
+                                var counter = 1;
+                            }
                             @foreach (var item in Model)
                             {
                                 <tr>
 
                                     <td>
-                                        @item.Id
+                                        @counter
                                     </td>
 
                                     <td class="fw-semibold">
@@ -111,6 +113,7 @@
                                     </td>
 
                                 </tr>
+                                counter++;
                             }
 
                         </tbody>

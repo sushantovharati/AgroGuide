@@ -94,6 +94,7 @@ namespace AgroGuide.Controllers
         [AdminAccess]
         public IActionResult Update(CropDTO cropDTO)
         {
+         
             if (ModelState.IsValid)
             {
                 var res = cropService.Update(cropDTO);
@@ -102,6 +103,7 @@ namespace AgroGuide.Controllers
                     TempData["Msg"] = "Product Updated Successfully";
                     return RedirectToAction("Index");
                 }
+                //return RedirectToAction("Index");
 
             }
             ViewBag.Categories = categoryService.Get();
