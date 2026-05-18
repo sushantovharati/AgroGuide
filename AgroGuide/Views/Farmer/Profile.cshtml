@@ -1,67 +1,114 @@
-﻿@{
+﻿@model BLL.DTOs.FarmerDTO
+
+@{
     Layout = "~/Views/Shared/_FarmerLayout.cshtml";
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Farmer Profile";
 }
 
 <section class="py-5 bg-light">
     <div class="container">
 
         <div class="row justify-content-center">
-
-            <div class="col-lg-7">
+            <div class="col-lg-8">
 
                 <div class="card border-0 shadow rounded-4">
+                    <div class="card-body p-5">
 
-                    <div class="card-body p-5 text-center">
-
-                        <div class="mb-4">
+                        <div class="text-center mb-5">
                             <i class="bi bi-person-circle text-success"
-                               style="font-size: 90px;"></i>
+                               style="font-size: 100px;"></i>
+
+                            <h2 class="fw-bold text-success mt-3">
+                                @Model.FirstName @Model.LastName
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                Farmer Account
+                            </p>
                         </div>
 
-                        <h2 class="fw-bold text-success">
-                            @ViewBag.UserName
-                        </h2>
+                        <div class="row g-4">
 
-                        <p class="text-muted mb-4">
-                            Farmer Account
-                        </p>
+                            <div class="col-md-6">
+                                <div class="border rounded-4 p-4 bg-light h-100">
+                                    <h6 class="fw-bold text-success mb-3">
+                                        Personal Information
+                                    </h6>
 
-                        <hr />
+                                    <p>
+                                        <strong>First Name:</strong><br />
+                                        @Model.FirstName
+                                    </p>
 
-                        <div class="text-start mt-4">
+                                    <p>
+                                        <strong>Last Name:</strong><br />
+                                        @Model.LastName
+                                    </p>
 
-                            <p>
-                                <strong>User Id:</strong>
-                                @ViewBag.UserId
-                            </p>
+                                    <p class="mb-0">
+                                        <strong>Land Size:</strong><br />
+                                        @Model.LandSize
+                                    </p>
+                                </div>
+                            </div>
 
-                            <p>
-                                <strong>Email:</strong>
-                                @ViewBag.UserEmail
-                            </p>
+                            <div class="col-md-6">
+                                <div class="border rounded-4 p-4 bg-light h-100">
+                                    <h6 class="fw-bold text-success mb-3">
+                                        Contact Information
+                                    </h6>
 
-                            <p>
-                                <strong>Role:</strong>
-                                Farmer
-                            </p>
+                                    <p>
+                                        <strong>Email:</strong><br />
+                                        @Model.Email
+                                    </p>
+
+                                    <p>
+                                        <strong>Phone:</strong><br />
+                                        @Model.Phone
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <strong>Address:</strong><br />
+                                        @Model.Address
+                                    </p>
+                                </div>
+                            </div>
 
                         </div>
 
-                        <a asp-controller="Farmer"
-                               asp-action="Dashboard"
-                               class="btn btn-success px-4 py-2 mt-3 rounded-3">
+                        <div class="d-flex justify-content-center gap-3 mt-5">
 
-                            Back to Dashboard
+                            <a asp-controller="Farmer"
+                                   asp-action="Update"
+                                   class="btn btn-success px-4 py-3 rounded-3 fw-semibold">
 
-                        </a>
+                                <i class="bi bi-pencil-square me-2"></i>
+                                Update Info
+                            </a>
+
+                            <a asp-controller="Farmer"
+                                   asp-action="ChangePassword"
+                                   class="btn btn-outline-success px-4 py-3 rounded-3 fw-semibold">
+
+                                <i class="bi bi-key me-2"></i>
+                                Change Password
+                            </a>
+
+                            <a asp-controller="Farmer"
+                                   asp-action="Delete"
+                                   class="btn btn-outline-danger px-4 py-3 rounded-3 fw-semibold">
+
+                                <i class="bi bi-trash me-2"></i>
+                                Delete Account
+                            </a>
+
+                        </div>
 
                     </div>
-
                 </div>
 
             </div>
-
         </div>
 
     </div>

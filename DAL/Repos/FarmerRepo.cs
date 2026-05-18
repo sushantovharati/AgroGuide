@@ -23,28 +23,9 @@ namespace DAL.Repos
                 .ToList();
         }
 
-        public Farmer Get(int id)
-        {
-            return db.Farmers.Find(id);
-        } 
-
         public bool Create(Farmer farmer)
         {
             db.Farmers.Add(farmer);
-            return db.SaveChanges() > 0;
-        }
-
-        public bool Update(Farmer f)
-        {
-            var exobj = Get(f.Id);
-            db.Entry(exobj).CurrentValues.SetValues(f);
-            return db.SaveChanges() > 0;
-        }
-
-        public bool Delete(int id)
-        {
-            var exobj = Get(id);
-            db.Farmers.Remove(exobj);
             return db.SaveChanges() > 0;
         }
 
@@ -69,6 +50,59 @@ namespace DAL.Repos
                      .OrderByDescending(x => x.CreatedAt)
                      .Take(5).Include(f => f.District)
                      .ToList();
+        }
+
+        public Farmer Get(int id)
+        {
+            return db.Farmers.Find(id);
+        }
+
+        public bool Update(Farmer farmer)
+        {
+            var exObj = db.Farmers.Find(farmer.Id);
+
+            if (exObj == null)
+            {
+                return false;
+            }
+
+            exObj.FirstName = farmer.FirstName;
+            exObj.LastName = farmer.LastName;
+            exObj.Phone = farmer.Phone;
+            exObj.Address = farmer.Address;
+            exObj.LandSize = farmer.LandSize;
+            exObj.DivisionId = farmer.DivisionId;
+            exObj.DistrictId = farmer.DistrictId;
+
+            return db.SaveChanges() > 0;
+        }
+
+        public bool ChangePassword(int id, string password)
+        {
+            var exObj = db.Farmers.Find(id);
+
+            if (exObj == null)
+            {
+                return false;
+            }
+
+            exObj.Password = password;
+
+            return db.SaveChanges() > 0;
+        }
+
+        public bool Delete(int id)
+        {
+            var exObj = db.Farmers.Find(id);
+
+            if (exObj == null)
+            {
+                return false;
+            }
+
+            db.Farmers.Remove(exObj);
+
+            return db.SaveChanges() > 0;
         }
 
     }

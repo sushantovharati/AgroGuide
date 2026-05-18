@@ -24,11 +24,6 @@ namespace BLL.Services
             var data = repo.Get();
             return mapper.Map<List<FarmerDTO>>(data);
         }
-        public FarmerDTO Get(int id)
-        {
-            var data = repo.Get(id);
-            return mapper.Map<FarmerDTO>(data);
-        }
 
         public bool Create(FarmerDTO Farmer)
         {
@@ -36,16 +31,7 @@ namespace BLL.Services
             return repo.Create(mapped);
         }
 
-        public bool Update(FarmerDTO Farmer)
-        {
-            var mapped = mapper.Map<Farmer>(Farmer);
-            return repo.Update(mapped);
-        }
-        public bool Delete(int id)
-        {
-            return repo.Delete(id);
-        }
-
+        
         public int Count()
         {
             return repo.Count();
@@ -56,6 +42,30 @@ namespace BLL.Services
             var data = repo.RecentFarmers();
 
             return mapper.Map<List<FarmerDTO>>(data);
+        }
+
+        public FarmerDTO Get(int id)
+        {
+            var data = repo.Get(id);
+
+            return mapper.Map<FarmerDTO>(data);
+        }
+
+        public bool Update(FarmerDTO farmer)
+        {
+            var data = mapper.Map<Farmer>(farmer);
+
+            return repo.Update(data);
+        }
+
+        public bool ChangePassword(int id, string password)
+        {
+            return repo.ChangePassword(id, password);
+        }
+
+        public bool Delete(int id)
+        {
+            return repo.Delete(id);
         }
     }
 }
