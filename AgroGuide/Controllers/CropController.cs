@@ -1,7 +1,9 @@
 ﻿using AgroGuide.AuthFilter;
 using BLL.DTOs;
 using BLL.Services;
+using DAL.EF.Tables;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AgroGuide.Controllers
 {
@@ -12,12 +14,14 @@ namespace AgroGuide.Controllers
         SeasonService seasonService;
         SoilTypeService soilTypeService;
         WaterRequirementService waterRequirementService;
+        NotificationService notificationService;
 
         public CropController(CropService cropService,
             CategoryService categoryService,
             SeasonService seasonService,
             SoilTypeService soilTypeService,
-            WaterRequirementService waterRequirementService
+            WaterRequirementService waterRequirementService,
+            NotificationService notificationService
             )
         {
             this.cropService = cropService;
@@ -25,6 +29,7 @@ namespace AgroGuide.Controllers
             this.seasonService = seasonService;
             this.soilTypeService = soilTypeService;
             this.waterRequirementService = waterRequirementService;
+            this.notificationService = notificationService;
         }
 
         public IActionResult Index()
@@ -63,11 +68,24 @@ namespace AgroGuide.Controllers
         {
             if (ModelState.IsValid)
             {
-                cropService.Create(crop);
+                var res = cropService.Create(crop);
 
-                TempData["Msg"] = "Crop Added Successfully";
+                if (res)
+                {
+                    notificationService.Create(new NotificationDTO
+                    {
+                        Title = "New Crop Added",
+                        Message = crop.CropName + " has been added",
+                        Type = "Crop",
+                        UserRole = "Farmer",
+                        IsRead = false,
+                        CreatedAt = DateTime.Now
+                    });
 
-                return RedirectToAction("Index");
+                    TempData["CropAddMsg"] = "Crop Added Successfully";
+
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.Categories = categoryService.Get();
@@ -100,6 +118,16 @@ namespace AgroGuide.Controllers
                 var res = cropService.Update(cropDTO);
                 if (res == true)
                 {
+                    notificationService.Create(new NotificationDTO
+                    {
+                        Title = "Crop Updated",
+                        Message = cropDTO.CropName + " has been Updated",
+                        Type = "Crop",
+                        UserRole = "Farmer",
+                        IsRead = false,
+                        CreatedAt = DateTime.Now
+                    });
+
                     TempData["Msg"] = "Product Updated Successfully";
                     return RedirectToAction("Index");
                 }

@@ -36,6 +36,8 @@ public partial class AgroGuideMsContext : DbContext
 
     public virtual DbSet<Fertilizer> Fertilizers { get; set; }
 
+    public virtual DbSet<Notification> Notifications { get; set; }
+
     public virtual DbSet<Season> Seasons { get; set; }
 
     public virtual DbSet<SoilType> SoilTypes { get; set; }
@@ -219,6 +221,25 @@ public partial class AgroGuideMsContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.UsageInstruction)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())", "DF_Notifications_CreatedAt")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Message)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.Title)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UserRole)
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });

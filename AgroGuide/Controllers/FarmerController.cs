@@ -11,12 +11,15 @@ namespace AgroGuide.Controllers
         FarmerService farmerService;
         DivisionService divisionService;
         DistrictService districtService;
+        NotificationService notificationService;
 
-        public FarmerController(FarmerService farmerService, DivisionService divisionService, DistrictService districtService)
+        public FarmerController(FarmerService farmerService, DivisionService divisionService, 
+            DistrictService districtService, NotificationService notificationService)
         {
             this.farmerService = farmerService;
             this.districtService = districtService;
             this.divisionService = divisionService;
+            this.notificationService = notificationService;
         }
 
         [AdminAccess]
@@ -29,6 +32,7 @@ namespace AgroGuide.Controllers
         [FarmerAccess]
         public IActionResult Dashboard()
         {
+            ViewBag.NotificationCount = notificationService.UnreadCount("Farmer");
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             return View();
         }
@@ -184,6 +188,17 @@ namespace AgroGuide.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [FarmerAccess]
+        public IActionResult Notifications()
+        {
+            var data = notificationService.GetByRole("Farmer");
+
+            notificationService.MarkAllAsRead("Farmer");
+
+            return View(data);
         }
     }
 }

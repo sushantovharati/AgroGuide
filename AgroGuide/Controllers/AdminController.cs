@@ -12,15 +12,17 @@ namespace AgroGuide.Controllers
         DiseaseService diseaseService;
         FarmerService farmerService;
         AdminService adminService;
+        NotificationService notificationService;
 
         public AdminController( CropService cropService, FertilizerService fertilizerService, DiseaseService diseaseService,    
-            FarmerService farmerService, AdminService adminService)
+            FarmerService farmerService, AdminService adminService, NotificationService notificationService)
         {
             this.cropService = cropService;
             this.fertilizerService = fertilizerService;
             this.diseaseService = diseaseService;
             this.farmerService = farmerService;
             this.adminService = adminService;
+            this.notificationService = notificationService;
         }
 
         public IActionResult Index()
@@ -38,6 +40,7 @@ namespace AgroGuide.Controllers
             ViewBag.DiseaseCount = diseaseService.Count();
             ViewBag.FarmerCount = farmerService.Count();
             ViewBag.RecentFarmers = farmerService.RecentFarmers();
+            ViewBag.NotificationCount = notificationService.UnreadCount("Admin");
 
             return View();
         }
@@ -125,6 +128,17 @@ namespace AgroGuide.Controllers
                 adminService.Delete(id);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [AdminAccess]
+        public IActionResult Notifications()
+        {
+            var data = notificationService.GetByRole("Admin");
+
+            notificationService.MarkAllAsRead("Admin");
+
+            return View(data);
         }
     }
 }

@@ -9,12 +9,20 @@ namespace AgroGuide.Controllers
         DistrictService districtService;
         DivisionService divisionService;
         AuthService authService;
+        MailService mailService;
+        NotificationService notificationService;
 
-        public AuthController(DistrictService districtService, DivisionService divisionService, AuthService authService)
+        public AuthController(DistrictService districtService, 
+            DivisionService divisionService, 
+            AuthService authService,
+            MailService mailService,
+            NotificationService notificationService)
         {
             this.districtService = districtService;
             this.divisionService = divisionService;
             this.authService = authService;
+            this.mailService = mailService;
+            this.notificationService = notificationService;
 
         }
         public IActionResult Index()
@@ -68,16 +76,35 @@ namespace AgroGuide.Controllers
             return View();
         }
 
+
         [HttpPost]
         public IActionResult Register(RegisterDTO data)
         {
             if (ModelState.IsValid)
             {
-                authService.Register(data);
+                var res = authService.Register(data);
 
-                TempData["Msg"] = "Registration successful. Please login.";
+                if (res)
+                {
+                    mailService.SendWelcomeMail(
+                        data.Email,
+                        data.FirstName + " " + data.LastName
+                    );
 
-                return RedirectToAction("Login");
+                    notificationService.Create(new NotificationDTO
+                    {
+                        Title = "New Farmer Registered",
+                        Message = data.FirstName + " " + data.LastName + " joined AgroGuide",
+                        Type = "FarmerRegistration",
+                        UserRole = "Admin",
+                        IsRead = false,
+                        CreatedAt = DateTime.Now
+                    });
+
+                    TempData["RegSuccMsg"] = "Registration successful. Please login.";
+
+                    return RedirectToAction("Login");
+                }
             }
 
             ViewBag.Divisions = divisionService.Get();

@@ -1,4 +1,8 @@
 ﻿<!-- File: Views/Shared/_FarmerLayout.cshtml -->
+@{
+    var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["Action"]?.ToString();
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +34,8 @@
             <div class="container">
 
                 <a class="navbar-brand fw-bold fs-3 text-success"
-                       asp-controller="Home"
-                       asp-action="Index">
+                       asp-controller="Farmer"
+                       asp-action="Dashboard">
 
                     <i class="bi bi-flower1 me-2"></i>
                     Agro Guide
@@ -55,77 +59,74 @@
                     <ul class="navbar-nav mx-auto gap-lg-3">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link px-3 py-2 rounded-3
+                                @((controller == "Farmer" && action == "Dashboard") ? "bg-success text-white fw-semibold" : "text-dark")"
                                    asp-controller="Farmer"
                                    asp-action="Dashboard">
-
                                 Home
-
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
-                                   asp-controller="Crop"
-                                   asp-action="Index">
-
-                                Crops
-
-                            </a>
+                            <a class="nav-link px-3 py-2 rounded-3 @(controller == "Crop" ? "bg-success text-white fw-semibold" : "text-dark")"
+                               asp-controller="Crop"
+                               asp-action="Index"> Crops </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+
+                            <a class="nav-link px-3 py-2 rounded-3 @(controller == "Fertilizer" ? "bg-success text-white fw-semibold" : "text-dark")"
                                    asp-controller="Fertilizer"
                                    asp-action="Index">
-
                                 Fertilizers
-
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link px-3 py-2 rounded-3 @(controller == "Disease" ? "bg-success text-white fw-semibold" : "text-dark")"
                                    asp-controller="Disease"
                                    asp-action="Index">
-
                                 Disease Guide
-
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link px-3 py-2 rounded-3 @(controller == "Weather" ? "bg-success text-white fw-semibold" : "text-dark")"
                                    asp-controller="Weather"
                                    asp-action="Index">
-
                                 Weather
-
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                                   asp-controller="Farmer"
-                                   asp-action="Profile">
-
-                                Profile
-
                             </a>
                         </li>
 
                     </ul>
 
+                    <!-- Right Side -->
                     <div class="d-flex align-items-center gap-3">
 
-                        <span class="fw-semibold text-success">
+                        <!-- Notification -->
+                        <a class="nav-link position-relative text-dark"
+                               asp-controller="Farmer"
+                               asp-action="Notifications">
+
+                            <i class="bi bi-bell-fill fs-5"></i>
+
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @(ViewBag.NotificationCount ?? 0)
+                            </span>
+
+                        </a>
+
+                        <!-- Profile -->
+                        <a class="nav-link px-3 py-2 rounded-3
+                            @((controller == "Farmer" && action == "Profile") ? "bg-success text-white fw-semibold" : "text-dark")"
+                               asp-controller="Farmer"
+                               asp-action="Profile">
 
                             <i class="bi bi-person-circle me-1"></i>
+                            Profile
+                        </a>
 
-                            @Context.Session.GetString("UserName")
-
-                        </span>
-
+                        <!-- Logout -->
                         <a class="btn btn-success px-4 py-2 fw-semibold rounded-3"
                                asp-controller="Auth"
                                asp-action="Logout">
