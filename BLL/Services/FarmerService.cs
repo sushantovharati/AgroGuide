@@ -45,5 +45,17 @@ namespace BLL.Services
         {
             return repo.Delete(id);
         }
+
+        public int Count()
+        {
+            return repo.Count();
+        }
+
+        public List<FarmerDTO> RecentFarmers()
+        {
+            var data = repo.RecentFarmers();
+
+            return mapper.Map<List<FarmerDTO>>(data);
+        }
     }
 }

@@ -43,5 +43,10 @@ namespace DAL.Repos
             db.Diseases.Remove(exobj);
             return db.SaveChanges() > 0;
         }
+
+        public int Count()
+        {
+            return db.Diseases.Count();
+        }
     }
 }

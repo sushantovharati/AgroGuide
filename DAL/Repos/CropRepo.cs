@@ -56,5 +56,10 @@ namespace DAL.Repos
             db.Crops.Remove(exobj);
             return db.SaveChanges() > 0;
         }
+
+        public int Count()
+        {
+            return db.Crops.Count();
+        }
     }
 }

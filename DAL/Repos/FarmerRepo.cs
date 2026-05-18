@@ -57,5 +57,19 @@ namespace DAL.Repos
 
             return data;
         }
+
+        public int Count()
+        {
+            return db.Farmers.Count();
+        }
+
+        public List<Farmer> RecentFarmers()
+        {
+            return db.Farmers
+                     .OrderByDescending(x => x.CreatedAt)
+                     .Take(5).Include(f => f.District)
+                     .ToList();
+        }
+
     }
 }

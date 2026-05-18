@@ -37,6 +37,7 @@ builder.Services.AddScoped<DivisionService>();
 builder.Services.AddScoped<DistrictService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<DiseaseService>();
+builder.Services.AddScoped<AdminService>();
 
 builder.Services.AddDbContext<AgroGuideMsContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));

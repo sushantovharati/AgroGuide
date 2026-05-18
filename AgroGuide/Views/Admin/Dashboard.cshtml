@@ -3,11 +3,16 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
 <section class="py-5 bg-light">
 
     <div class="container">
 
-        <div class="card border-0 shadow-lg rounded-4">
+        <!-- Welcome Card -->
+        <div class="card border-0 shadow-lg rounded-4 mb-5">
 
             <div class="card-body p-5 text-center">
 
@@ -23,7 +28,323 @@
 
         </div>
 
-        <div class="d-block" style="height: 500px;"></div>
+        <!-- Statistics Cards -->
+        <div class="row g-4">
+
+            <!-- Crops -->
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card border-0 shadow rounded-4 h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <i class="bi bi-tree-fill text-success display-4"></i>
+
+                        <h2 class="fw-bold mt-3">
+                            @ViewBag.CropCount
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Total Crops
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Fertilizers -->
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card border-0 shadow rounded-4 h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <i class="bi bi-droplet-fill text-primary display-4"></i>
+
+                        <h2 class="fw-bold mt-3">
+                            @ViewBag.FertilizerCount
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Total Fertilizers
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Diseases -->
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card border-0 shadow rounded-4 h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <i class="bi bi-bug-fill text-danger display-4"></i>
+
+                        <h2 class="fw-bold mt-3">
+                            @ViewBag.DiseaseCount
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Total Diseases
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Farmers -->
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card border-0 shadow rounded-4 h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <i class="bi bi-people-fill text-warning display-4"></i>
+
+                        <h2 class="fw-bold mt-3">
+                            @ViewBag.FarmerCount
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Total Farmers
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card border-0 shadow rounded-4 mt-5">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h3 class="fw-bold text-success mb-1">
+                            Quick Actions
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Manage AgroGuide modules quickly
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- Add Crop -->
+                    <div class="col-lg-3 col-md-6">
+
+                        <a asp-controller="Crop"
+                               asp-action="Create"
+                               class="text-decoration-none">
+
+                            <div class="card border-0 shadow-sm rounded-4 h-100 quick-card">
+
+                                <div class="card-body text-center p-4">
+
+                                    <i class="bi bi-tree-fill text-success display-5"></i>
+
+                                    <h5 class="fw-bold mt-3 text-dark">
+                                        Add Crop
+                                    </h5>
+
+                                    <p class="text-muted mb-0">
+                                        Create new crop information
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <!-- Add Fertilizer -->
+                    <div class="col-lg-3 col-md-6">
+
+                        <a asp-controller="Fertilizer"
+                               asp-action="Create"
+                               class="text-decoration-none">
+
+                            <div class="card border-0 shadow-sm rounded-4 h-100 quick-card">
+
+                                <div class="card-body text-center p-4">
+
+                                    <i class="bi bi-droplet-fill text-primary display-5"></i>
+
+                                    <h5 class="fw-bold mt-3 text-dark">
+                                        Add Fertilizer
+                                    </h5>
+
+                                    <p class="text-muted mb-0">
+                                        Add fertilizer details
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <!-- Add Disease -->
+                    <div class="col-lg-3 col-md-6">
+
+                        <a asp-controller="Disease"
+                               asp-action="Create"
+                               class="text-decoration-none">
+
+                            <div class="card border-0 shadow-sm rounded-4 h-100 quick-card">
+
+                                <div class="card-body text-center p-4">
+
+                                    <i class="bi bi-bug-fill text-danger display-5"></i>
+
+                                    <h5 class="fw-bold mt-3 text-dark">
+                                        Add Disease
+                                    </h5>
+
+                                    <p class="text-muted mb-0">
+                                        Create disease guide
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <!-- View Farmers -->
+                    <div class="col-lg-3 col-md-6">
+
+                        <a asp-controller="Farmer"
+                               asp-action="Index"
+                               class="text-decoration-none">
+
+                            <div class="card border-0 shadow-sm rounded-4 h-100 quick-card">
+
+                                <div class="card-body text-center p-4">
+
+                                    <i class="bi bi-people-fill text-warning display-5"></i>
+
+                                    <h5 class="fw-bold mt-3 text-dark">
+                                        Farmers
+                                    </h5>
+
+                                    <p class="text-muted mb-0">
+                                        View registered farmers
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Recent Farmers -->
+        <div class="card border-0 shadow rounded-4 mt-5">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h3 class="fw-bold text-success mb-1">
+                            Recent Farmers
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Recently registered farmers in AgroGuide
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Farmer Name</th>
+
+                                <th>Email</th>
+
+                                <th>District</th>
+
+                                <th>Joined Date</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var farmer in ViewBag.RecentFarmers)
+                            {
+                                <tr>
+
+                                    <td class="fw-semibold">
+                                        @farmer.FirstName @farmer.LastName
+                                    </td>
+
+                                    <td>
+                                        @farmer.Email
+                                    </td>
+
+                                    <td>
+                                        @farmer.District.DistrictName
+                                    </td>
+
+                                    <td>
+                                        @farmer.CreatedAt.ToString("dd MMM yyyy")
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 

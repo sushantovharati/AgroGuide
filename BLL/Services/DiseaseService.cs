@@ -45,5 +45,10 @@ namespace BLL.Services
         {
             return repo.Delete(id);
         }
+
+        public int Count()
+        {
+            return repo.Count();
+        }
     }
 }

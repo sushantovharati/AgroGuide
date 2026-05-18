@@ -106,11 +106,29 @@
 
                     <div class="d-flex align-items-center gap-3">
 
-                        <span class="fw-semibold text-success">
-                            <i class="bi bi-person-circle me-1"></i>
-                            @Context.Session.GetString("UserName")
-                        </span>
+                        <!-- Notification -->
+                        <a class="nav-link position-relative text-dark"
+                               href="#">
 
+                            <i class="bi bi-bell-fill fs-5"></i>
+
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                30
+                            </span>
+
+                        </a>
+
+                        <!-- Profile -->
+                        <a class="nav-link text-dark fw-semibold"
+                               asp-controller="Admin"
+                               asp-action="Profile">
+
+                            <i class="bi bi-person-circle me-1"></i>
+                            Profile
+
+                        </a>
+
+                        <!-- Logout -->
                         <a class="btn btn-success px-4 py-2 fw-semibold rounded-3"
                                asp-controller="Auth"
                                asp-action="Logout">

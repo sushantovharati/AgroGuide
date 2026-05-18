@@ -21,6 +21,8 @@ namespace BLL
             cfg.CreateMap<Division, DivisionDTO>().ReverseMap();
             cfg.CreateMap<District, DistrictDTO>().ReverseMap();
             cfg.CreateMap<Disease, DiseaseDTO>().ReverseMap();
+            cfg.CreateMap<Admin, AdminDTO>().ReverseMap();
+
 
         });
         public static Mapper GetMapper()
