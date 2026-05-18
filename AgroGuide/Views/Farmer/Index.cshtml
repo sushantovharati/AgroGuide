@@ -26,6 +26,39 @@
 
         </div>
 
+        <form method="get"
+              asp-controller="Farmer"
+              asp-action="Index"
+              class="mb-4">
+
+            <div class="input-group">
+
+                <input type="text"
+                       name="search"
+                       value="@ViewBag.Search"
+                       class="form-control form-control-lg"
+                       placeholder="Search farmer by name, email, phone, or district..." />
+
+                <button type="submit"
+                        class="btn btn-success px-4 ms-2">
+
+                    <i class="bi bi-search me-1"></i>
+                    Search
+
+                </button>
+
+                <a asp-controller="Farmer"
+                       asp-action="Index"
+                       class="btn btn-secondary px-4 ms-2">
+
+                    Clear
+
+                </a>
+
+            </div>
+
+        </form>
+
         <!-- Table -->
         <div class="card border-0 shadow rounded-4">
 

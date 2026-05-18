@@ -53,5 +53,16 @@ namespace DAL.Repos
         {
             return db.Diseases.FirstOrDefault(d => d.Id == id);
         }
+
+        public List<Disease> Search(string search)
+        {
+            return db.Diseases
+                .Where(d => d.DiseaseName.Contains(search)
+                         || d.Symptoms.Contains(search)
+                         || d.Causes.Contains(search)
+                         || d.Solution.Contains(search)
+                         || d.Prevention.Contains(search))
+                .ToList();
+        }
     }
 }

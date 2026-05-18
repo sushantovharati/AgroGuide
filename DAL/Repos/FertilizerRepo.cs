@@ -54,5 +54,13 @@ namespace DAL.Repos
             return db.Fertilizers.FirstOrDefault(f => f.Id == id);
         }
 
+        public List<Fertilizer> Search(string search)
+        {
+            return db.Fertilizers
+                .Where(f => f.FertilizerName.Contains(search)
+                         || f.Type.Contains(search)
+                         || f.UsageInstruction.Contains(search))
+                .ToList();
+        }
     }
 }

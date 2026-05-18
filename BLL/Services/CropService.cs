@@ -56,5 +56,11 @@ namespace BLL.Services
         {
             return repo.Count();
         }
+
+        public List<CropDTO> Search(string search)
+        {
+            var data = repo.Search(search);
+            return mapper.Map<List<CropDTO>>(data);
+        }
     }
 }

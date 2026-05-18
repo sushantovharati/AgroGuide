@@ -13,7 +13,7 @@ namespace AgroGuide.Controllers
         DistrictService districtService;
         NotificationService notificationService;
 
-        public FarmerController(FarmerService farmerService, DivisionService divisionService, 
+        public FarmerController(FarmerService farmerService, DivisionService divisionService,
             DistrictService districtService, NotificationService notificationService)
         {
             this.farmerService = farmerService;
@@ -23,9 +23,12 @@ namespace AgroGuide.Controllers
         }
 
         [AdminAccess]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var farmer = farmerService.Get();
+            var farmer = string.IsNullOrEmpty(search) ? farmerService.Get() : farmerService.Search(search);
+
+            ViewBag.Search = search;
+
             return View(farmer);
         }
 
@@ -53,7 +56,7 @@ namespace AgroGuide.Controllers
             return View(data);
         }
 
-        
+
         [HttpGet]
         [FarmerAccess]
         public IActionResult Update()

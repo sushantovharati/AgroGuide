@@ -64,5 +64,18 @@ namespace DAL.Repos
         {
             return db.Crops.Count();
         }
+
+        public List<Crop> Search(string search)
+        {
+            return db.Crops
+                .Include(c => c.Category)
+                .Include(c => c.Season)
+                .Include(c => c.SoilType)
+                .Include(c => c.WaterRequirement)
+                .Where(c => c.CropName.Contains(search)
+                         || c.ScientificName.Contains(search)
+                         || c.Description.Contains(search))
+                .ToList();
+        }
     }
 }

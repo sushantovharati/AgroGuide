@@ -57,5 +57,11 @@ namespace BLL.Services
 
             return mapper.Map<DiseaseDTO>(data);
         }
+
+        public List<DiseaseDTO> Search(string search)
+        {
+            var data = repo.Search(search);
+            return mapper.Map<List<DiseaseDTO>>(data);
+        }
     }
 }

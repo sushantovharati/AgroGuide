@@ -105,5 +105,20 @@ namespace DAL.Repos
             return db.SaveChanges() > 0;
         }
 
+        public List<Farmer> Search(string search)
+        {
+            return db.Farmers
+                .Include(f => f.Division)
+                .Include(f => f.District)
+                .Where(f =>
+                    f.FirstName.Contains(search) ||
+                    f.LastName.Contains(search) ||
+                    f.Email.Contains(search) ||
+                    f.Phone.Contains(search) ||
+                    f.Address.Contains(search) ||
+                    f.District.DistrictName.Contains(search))
+                .ToList();
+        }
+
     }
 }

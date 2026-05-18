@@ -32,22 +32,25 @@ namespace AgroGuide.Controllers
             this.notificationService = notificationService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var crops = cropService.Get();
             var role = HttpContext.Session.GetString("Role");
+
+            var data = string.IsNullOrEmpty(search) ? cropService.Get() : cropService.Search(search);
+
+            ViewBag.Search = search;
 
             if (role == "Admin")
             {
-                return View("AdminIndex", crops);
+                return View("AdminIndex", data);
             }
 
             if (role == "Farmer")
             {
-                return View("Index", crops);
+                return View("Index", data);
             }
 
-            return View(crops);
+            return View(data);
         }
 
         [HttpGet]
@@ -112,7 +115,7 @@ namespace AgroGuide.Controllers
         [AdminAccess]
         public IActionResult Update(CropDTO cropDTO)
         {
-         
+
             if (ModelState.IsValid)
             {
                 var res = cropService.Update(cropDTO);

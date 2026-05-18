@@ -14,10 +14,13 @@ namespace AgroGuide.Controllers
         {
             this.fertilizerService = fertilizerService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var data = fertilizerService.Get();
             var role = HttpContext.Session.GetString("Role");
+
+            var data = string.IsNullOrEmpty(search) ? fertilizerService.Get() : fertilizerService.Search(search);
+
+            ViewBag.Search = search;
 
             if (role == "Admin")
             {

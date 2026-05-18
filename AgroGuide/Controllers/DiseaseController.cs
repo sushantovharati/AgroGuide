@@ -13,11 +13,12 @@ namespace AgroGuide.Controllers
         {
             this.diseaseService = diseaseService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var data = diseaseService.Get();
             var role = HttpContext.Session.GetString("Role");
+            var data = string.IsNullOrEmpty(search) ? diseaseService.Get() : diseaseService.Search(search);
 
+            ViewBag.Search = search;
             if (role == "Admin")
             {
                 return View("AdminIndex", data);

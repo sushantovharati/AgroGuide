@@ -58,5 +58,11 @@ namespace BLL.Services
             return mapper.Map<FertilizerDTO>(data);
         }
 
+        public List<FertilizerDTO> Search(string search)
+        {
+            var data = repo.Search(search);
+            return mapper.Map<List<FertilizerDTO>>(data);
+        }
+
     }
 }

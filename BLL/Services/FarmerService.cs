@@ -67,5 +67,12 @@ namespace BLL.Services
         {
             return repo.Delete(id);
         }
+
+        public List<FarmerDTO> Search(string search)
+        {
+            var data = repo.Search(search);
+
+            return mapper.Map<List<FarmerDTO>>(data);
+        }
     }
 }
