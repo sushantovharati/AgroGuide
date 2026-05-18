@@ -130,5 +130,18 @@ namespace AgroGuide.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Details(int id)
+        {
+            var data = cropService.Details(id);
+
+            if (data == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(data);
+        }
+
     }
 }

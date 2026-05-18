@@ -48,5 +48,11 @@ namespace DAL.Repos
         {
             return db.Fertilizers.Count();
         }
+
+        public Fertilizer Details(int id)
+        {
+            return db.Fertilizers.FirstOrDefault(f => f.Id == id);
+        }
+
     }
 }

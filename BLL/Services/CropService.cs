@@ -30,6 +30,12 @@ namespace BLL.Services
             return mapper.Map<CropDTO>(data);
         }
 
+        public CropDTO Details(int id)
+        {
+            var data = repo.Details(id);
+            return mapper.Map<CropDTO>(data);
+        }
+
         public bool Create(CropDTO Crop)
         {
             var mapped = mapper.Map<Crop>(Crop);

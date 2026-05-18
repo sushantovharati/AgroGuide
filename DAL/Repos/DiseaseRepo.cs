@@ -48,5 +48,10 @@ namespace DAL.Repos
         {
             return db.Diseases.Count();
         }
+
+        public Disease Details(int id)
+        {
+            return db.Diseases.FirstOrDefault(d => d.Id == id);
+        }
     }
 }

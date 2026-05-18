@@ -51,5 +51,12 @@ namespace BLL.Services
             return repo.Count();
         }
 
+        public FertilizerDTO Details(int id)
+        {
+            var data = repo.Details(id);
+
+            return mapper.Map<FertilizerDTO>(data);
+        }
+
     }
 }

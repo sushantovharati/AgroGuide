@@ -30,17 +30,20 @@ namespace DAL.Repos
         public Crop Get(int id)
         {
             return db.Crops.Find(id);
-            //return db.Crops
-            //    .Include(c => c.Category)
-            //    .Include(c => c.Season)
-            //    .Include(c => c.SoilType)
-            //    .Include(c => c.WaterRequirement)
-            //    .FirstOrDefault(c => c.Id == id);
+        }
+
+        public Crop Details(int id)
+        {
+            return db.Crops.Include(c => c.Category)
+                .Include(c => c.Season)
+                .Include(c => c.SoilType)
+                .Include(c => c.WaterRequirement)
+                .FirstOrDefault(c => c.Id == id);
         }
 
         public bool Create(Crop c)
         {
-            db.Crops.Add(c);
+            db.Crops.Add(c); 
             return db.SaveChanges() > 0;
         }
 

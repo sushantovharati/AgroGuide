@@ -50,5 +50,12 @@ namespace BLL.Services
         {
             return repo.Count();
         }
+
+        public DiseaseDTO Details(int id)
+        {
+            var data = repo.Details(id);
+
+            return mapper.Map<DiseaseDTO>(data);
+        }
     }
 }
