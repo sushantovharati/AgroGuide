@@ -1,0 +1,85 @@
+﻿@model BLL.DTOs.ContactMessageDTO
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Reply Message";
+}
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="card border-0 shadow rounded-4">
+
+            <div class="card-body p-5">
+
+                <h2 class="fw-bold text-success mb-4">
+                    Reply Message
+                </h2>
+
+                <div class="mb-4">
+
+                    <h5 class="fw-semibold">From</h5>
+
+                    <p>@Model.FullName (@Model.Email)</p>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <h5 class="fw-semibold">Subject</h5>
+
+                    <p>@Model.Subject</p>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <h5 class="fw-semibold">Original Message</h5>
+
+                    <div class="border rounded-4 p-4 bg-light">
+                        @Model.Message
+                    </div>
+
+                </div>
+
+                <form method="post">
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Reply
+                        </label>
+
+                        <textarea name="replyMessage"
+                                  rows="6"
+                                  class="form-control"
+                                  placeholder="Write your reply here"></textarea>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-success px-5">
+
+                        <i class="bi bi-send-fill me-2"></i>
+                        Send Reply
+
+                    </button>
+
+                    <a asp-controller="Admin"
+                           asp-action="Inbox"
+                           class="btn btn-secondary px-4 ms-2">
+
+                        Cancel
+
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

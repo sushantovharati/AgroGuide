@@ -20,6 +20,8 @@ public partial class AgroGuideMsContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<ContactMessage> ContactMessages { get; set; }
+
     public virtual DbSet<Crop> Crops { get; set; }
 
     public virtual DbSet<CropDisease> CropDiseases { get; set; }
@@ -79,6 +81,18 @@ public partial class AgroGuideMsContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<ContactMessage>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ContactM__3214EC07C5DE55F6");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.Subject).HasMaxLength(200);
         });
 
         modelBuilder.Entity<Crop>(entity =>

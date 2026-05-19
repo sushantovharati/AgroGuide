@@ -23,6 +23,7 @@ namespace BLL
             cfg.CreateMap<Disease, DiseaseDTO>().ReverseMap();
             cfg.CreateMap<Admin, AdminDTO>().ReverseMap();
             cfg.CreateMap<Notification, NotificationDTO>().ReverseMap();
+            cfg.CreateMap<ContactMessage, ContactMessageDTO>().ReverseMap();
 
 
         });

@@ -13,9 +13,12 @@ namespace AgroGuide.Controllers
         FarmerService farmerService;
         AdminService adminService;
         NotificationService notificationService;
+        ContactMessageService contactMessageService;
+        MailService mailService;
 
         public AdminController( CropService cropService, FertilizerService fertilizerService, DiseaseService diseaseService,    
-            FarmerService farmerService, AdminService adminService, NotificationService notificationService)
+            FarmerService farmerService, AdminService adminService, NotificationService notificationService, 
+            ContactMessageService contactMessageService, MailService mailService)
         {
             this.cropService = cropService;
             this.fertilizerService = fertilizerService;
@@ -23,6 +26,8 @@ namespace AgroGuide.Controllers
             this.farmerService = farmerService;
             this.adminService = adminService;
             this.notificationService = notificationService;
+            this.contactMessageService = contactMessageService;
+            this.mailService = mailService;
         }
 
         public IActionResult Index()
@@ -139,6 +144,58 @@ namespace AgroGuide.Controllers
             notificationService.MarkAllAsRead("Admin");
 
             return View(data);
+        }
+
+        [HttpGet]
+        [AdminAccess]
+        public IActionResult Inbox()
+        {
+            var data = contactMessageService.Get();
+
+            return View(data);
+        }
+
+
+        [HttpGet]
+        [AdminAccess]
+        public IActionResult MessageDetails(int id)
+        {
+            var data = contactMessageService.Get(id);
+
+            return View(data);
+        }
+
+
+        [HttpGet]
+        [AdminAccess]
+        public IActionResult ReplyMessage(int id)
+        {
+            var data = contactMessageService.Get(id);
+
+            return View(data);
+        }
+
+
+        [HttpPost]
+        [AdminAccess]
+        public IActionResult ReplyMessage(int id, string replyMessage)
+        {
+            var message = contactMessageService.Get(id);
+
+            var res = contactMessageService.Reply(id, replyMessage);
+
+            if (res)
+            {
+                mailService.SendReplyMail(
+                    message.Email,
+                    message.Subject,
+                    replyMessage
+                );
+
+                TempData["Msg"] = "Reply sent successfully";
+            }
+
+            return RedirectToAction("Inbox");
         }
     }
 }

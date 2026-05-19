@@ -1,0 +1,115 @@
+﻿@model List<BLL.DTOs.ContactMessageDTO>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Contact Inbox";
+}
+
+<section class="py-5 bg-light">
+    <div class="container">
+
+        <div class="card border-0 shadow rounded-4">
+            <div class="card-body p-4">
+
+                <h2 class="fw-bold text-success mb-2">
+                    Contact Inbox
+                </h2>
+
+                <p class="text-muted mb-4">
+                    Messages received from AgroGuide contact form
+                </p>
+
+                @if (Model == null || Model.Count == 0)
+                {
+                    <div class="alert alert-info">
+                        No contact messages found.
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle">
+
+                            <thead class="table-success">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                    <th>Received</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+
+                                        <td class="fw-semibold">
+                                            @item.FullName
+                                        </td>
+
+                                        <td>@item.Email</td>
+
+                                        <td>@item.Subject</td>
+
+                                        <td>
+                                            @if (item.IsReplied)
+                                            {
+                                                <span class="badge bg-success">Replied</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @item.CreatedAt.ToString("dd MMM yyyy")
+                                        </td>
+
+                                        <td>
+
+                                            <div class="d-flex gap-2">
+
+                                                <a asp-controller="Admin"
+                                                       asp-action="MessageDetails"
+                                                       asp-route-id="@item.Id"
+                                                       class="btn btn-sm btn-outline-success">
+
+                                                    <i class="bi bi-eye"></i>
+                                                    View
+
+                                                </a>
+
+                                                <a asp-controller="Admin"
+                                                       asp-action="ReplyMessage"
+                                                       asp-route-id="@item.Id"
+                                                       class="btn btn-sm btn-success">
+
+                                                    <i class="bi bi-reply-fill"></i>
+                                                    Reply
+
+                                                </a>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+</section>

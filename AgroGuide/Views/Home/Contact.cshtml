@@ -1,18 +1,32 @@
-﻿@{
+﻿@model BLL.DTOs.ContactMessageDTO
+
+@{
     ViewData["Title"] = "Contact";
 }
 
 <section class="py-5 bg-light">
+
     <div class="container">
 
         <!-- Heading -->
         <div class="text-center mb-5">
-            <h1 class="fw-bold text-success">Contact AgroGuide</h1>
+
+            <h1 class="fw-bold text-success">
+                Contact AgroGuide
+            </h1>
 
             <p class="lead text-muted">
                 We are here to support smart farming and agricultural innovation
             </p>
+
         </div>
+
+        @if (TempData["Msg"] != null)
+        {
+            <div class="alert alert-success text-center mb-4">
+                @TempData["Msg"]
+            </div>
+        }
 
         <div class="row g-4">
 
@@ -20,6 +34,7 @@
             <div class="col-lg-5">
 
                 <div class="card border-0 shadow rounded-4 h-100">
+
                     <div class="card-body p-4">
 
                         <h3 class="fw-bold text-success mb-4">
@@ -80,6 +95,7 @@
                         </div>
 
                     </div>
+
                 </div>
 
             </div>
@@ -88,13 +104,14 @@
             <div class="col-lg-7">
 
                 <div class="card border-0 shadow rounded-4">
+
                     <div class="card-body p-4">
 
                         <h3 class="fw-bold text-success mb-4">
                             Send Us a Message
                         </h3>
 
-                        <form>
+                        <form method="post">
 
                             <div class="row">
 
@@ -104,7 +121,7 @@
                                         Full Name
                                     </label>
 
-                                    <input type="text"
+                                    <input asp-for="FullName"
                                            class="form-control form-control-lg"
                                            placeholder="Enter your full name" />
 
@@ -116,7 +133,7 @@
                                         Email Address
                                     </label>
 
-                                    <input type="email"
+                                    <input asp-for="Email"
                                            class="form-control form-control-lg"
                                            placeholder="Enter your email address" />
 
@@ -130,7 +147,7 @@
                                     Subject
                                 </label>
 
-                                <input type="text"
+                                <input asp-for="Subject"
                                        class="form-control form-control-lg"
                                        placeholder="Enter message subject" />
 
@@ -142,7 +159,8 @@
                                     Message
                                 </label>
 
-                                <textarea class="form-control"
+                                <textarea asp-for="Message"
+                                          class="form-control"
                                           rows="6"
                                           placeholder="Write your message here"></textarea>
 
@@ -159,6 +177,7 @@
                         </form>
 
                     </div>
+
                 </div>
 
             </div>
@@ -166,4 +185,5 @@
         </div>
 
     </div>
+
 </section>

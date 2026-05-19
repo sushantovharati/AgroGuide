@@ -25,6 +25,7 @@ builder.Services.AddScoped<DistrictRepo>();
 builder.Services.AddScoped<DiseaseRepo>();
 builder.Services.AddScoped<AdminRepo>();
 builder.Services.AddScoped<NotificationRepo>();
+builder.Services.AddScoped<ContactMessageRepo>();
 
 
 //Services
@@ -42,6 +43,7 @@ builder.Services.AddScoped<DiseaseService>();
 builder.Services.AddScoped<AdminService>();
 builder.Services.AddScoped<MailService>();
 builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<ContactMessageService>();
 
 builder.Services.AddDbContext<AgroGuideMsContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConn"));
