@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTOs;
+using BLL.Helpers;
 using DAL.EF.Tables;
 using DAL.Repos;
 using System;
@@ -31,7 +32,7 @@ namespace BLL.Services
             return repo.Create(mapped);
         }
 
-        
+
         public int Count()
         {
             return repo.Count();
@@ -60,6 +61,8 @@ namespace BLL.Services
 
         public bool ChangePassword(int id, string password)
         {
+            password = HashHelper.GetMd5(password);
+
             return repo.ChangePassword(id, password);
         }
 

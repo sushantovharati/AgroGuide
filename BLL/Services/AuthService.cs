@@ -5,6 +5,7 @@ using DAL.Repos;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using BLL.Helpers;
 
 namespace BLL.Services
 {
@@ -25,6 +26,8 @@ namespace BLL.Services
         {
             var farmer = mapper.Map<Farmer>(data);
 
+            farmer.Password = HashHelper.GetMd5(data.Password);
+
             farmer.CreatedAt = DateTime.Now;
 
             return farmerRepo.Create(farmer);
@@ -32,7 +35,9 @@ namespace BLL.Services
 
         public LoginResponseDTO Login(LoginDTO data)
         {
-            var admin = adminRepo.GetByEmailPassword(data.Email, data.Password);
+            var hashedPassword = HashHelper.GetMd5(data.Password);
+
+            var admin = adminRepo.GetByEmailPassword(data.Email, hashedPassword);
 
             if (admin != null)
             {
@@ -45,7 +50,7 @@ namespace BLL.Services
                 };
             }
 
-            var farmer = farmerRepo.GetByEmailPassword(data.Email, data.Password);
+            var farmer = farmerRepo.GetByEmailPassword(data.Email, hashedPassword);
 
             if (farmer != null)
             {
